@@ -1,4 +1,3 @@
-knoodle_index:
-    pattern: /knoodle
-    defaults:
-        _controller: 'KnpKnoodleBundle:Survey:index'
+knp_doodle:
+    resource:   "@KnpKnoodleBundle/Resources/config/routing.yml"
+    prefix:     /knoodle

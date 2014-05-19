@@ -1,0 +1,30 @@
+{% extends 'KnpKnoodleBundle::layout.html.twig' %}
+
+{% block content %}
+    <div id="survey-show">
+        <h3><?php echo $survey['name'] ?></h3>
+        <div class="meta">
+            Added by
+            <span class="author">{{ survey.authorFirstname ~ ' ' ~ survey.authorLastname }}</span>
+            on
+            <span class="date">{{ survey.createdAt|date('l, j F Y @ H:i') }}</span>
+        </div>
+        <div class="questions">
+
+            {% for question in survey.questions %}
+            <div class="question">
+                <h4>{{ question.sentence }}</h4>
+                <ul class="choices">
+                    <li class="choice">{{ question.firstChoice }}</li>
+                    <li class="choice">{{ question.secondChoice }}</li>
+                    <li class="choice">{{ question.thirdChoice }}</li>
+                </ul>
+            </div>
+            {% endfor %}
+
+        </div>
+        <a class="button fleft" href="{{ path('knoodle_index') }}">&larr; Back to list</a>
+        <a class="button fright" href="{{ path('knoodle_answer', {'id': survey.id})}}">Answer this survey &rarr;</a>
+    </div>
+{% endblock %}
+

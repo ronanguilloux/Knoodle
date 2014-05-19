@@ -1,0 +1,17 @@
+{% extends 'KnpKnoodleBundle::layout.html.twig' %}
+{% block content %}
+        <div id="survey-list">
+            <h3>Surveys List</h3>
+            {% for survey in surveys %}
+            <div class="survey">
+                <a href="{{ path('knoodle_show', { id: survey.id } ) }}" class="name">{{ survey.name }}</a>
+                <div class="meta">
+                    Added by
+                    <span class="author">{{ survey.authorFirstName ~ ' ' ~ survey.authorLastName }}</span>
+                    on
+                    <span class="date">{{ survey.createdAt|date('l, j F Y @ H:i') }}</span>
+                </div>
+            </div>
+            {% endfor %}
+    </div>
+{% endblock %}

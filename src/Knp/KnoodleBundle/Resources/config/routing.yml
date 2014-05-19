@@ -1,0 +1,19 @@
+knoodle_index:
+    pattern: / #cf. prefix
+    defaults:
+        _controller: 'KnpKnoodleBundle:Survey:index'
+
+knoodle_show:
+    pattern: /{id} #cf. prefix
+    defaults:
+        _controller: 'KnpKnoodleBundle:Survey:show'
+    requirements:
+        id: '\d+'
+
+knoodle_answer:
+    pattern: /{id}/answer
+    defaults:
+        _controller: 'KnpKnoodleBundle:Survey:answer'
+    requirements:
+        id: '\d+'
+
