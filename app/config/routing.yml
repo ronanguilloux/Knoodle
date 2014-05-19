@@ -1,0 +1,4 @@
+knoodle_index:
+    pattern: /knoodle
+    defaults:
+        _controller: 'KnpKnoodleBundle:Survey:index'
