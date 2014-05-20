@@ -51,7 +51,7 @@ Class Survey
     private $createdAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="Question", mappedBy="survey")
+     * @ORM\OneToMany(targetEntity="Question", mappedBy="survey", cascade={"persist", "remove"})
      */
     private $questions;
 

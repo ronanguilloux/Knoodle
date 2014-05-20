@@ -99,8 +99,6 @@ class SurveyController extends Controller
                 ;
 
                 $question->addAnswer($answer);
-
-                $manager->persist($answer);
                 $manager->persist($question);
             }
 

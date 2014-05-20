@@ -41,12 +41,11 @@ Class Question
 
     /**
      * @ORM\ManyToOne(targetEntity="Survey", inversedBy="questions")
-     * @var [type]
      */
     private $survey;
 
     /**
-     * @ORM\OneToMany(targetEntity="Answer", mappedBy="question")
+     * @ORM\OneToMany(targetEntity="Answer", mappedBy="question", cascade={"persist", "remove"})
      */
     private $answers;
 
