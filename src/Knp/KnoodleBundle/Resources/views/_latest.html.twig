@@ -1,0 +1,6 @@
+<ul>
+    {% for survey in surveys %}
+        <li><a href="{{ path('knoodle_show', {id: survey.id}) }}">{{ survey.name}}</a></li>
+    {% endfor %}
+
+</ul>

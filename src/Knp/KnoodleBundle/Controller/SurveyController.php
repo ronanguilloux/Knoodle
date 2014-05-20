@@ -45,12 +45,50 @@ class SurveyController extends Controller
             ->getDoctrine()
             ->getManager()
             ->getRepository('KnpKnoodleBundle:Survey')
-            ->findAll();
+            ->findAllOrderByCreation();
 
         return $this->render(
             'KnpKnoodleBundle:Survey:index.html.twig',
             ['surveys' => $surveys]
         );
+    }
+
+
+    public function latestAction($limit = 10)
+    {
+        $limit = (int)$limit > 0 ? (int)$limit : 1;
+        $surveys = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('KnpKnoodleBundle:Survey')
+            ->findAllOrderByCreationLimitedBy($limit);
+        ;
+
+        return $this->render(
+            'KnpKnoodleBundle:Survey:_latest.html.twig',
+            ['surveys' => $surveys]
+        );
+    }
+
+    /**
+     * popularAction
+     *
+     * @return Response
+     */
+    public function popularAction()
+    {
+        $surveys = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('KnpKnoodleBundle:Survey')
+            ->findAllPopular()
+        ;
+
+        return $this->render(
+            'KnpKnoodleBundle:Survey:popular.html.twig',
+            ['surveys' => $surveys]
+        );
+
     }
 
     /**

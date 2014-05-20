@@ -12,6 +12,7 @@
             <h2>{% block pageTitle%}{{ block('title') }}{% endblock %}</h2>
         </div>
     </div>
+    {% include 'KnpKnoodleBundle::_menu.html.twig' %}
     {% if app.session.flashbag.keys %}
     <div id="flashes">
         {% for name, message in app.session.flashbag.all %}
@@ -28,6 +29,7 @@
     </div>
     <div id="footer" class="wrap">
         <p>Knoodle - {% block footerTitle %}{{ block('title') }}{% endblock %}</p>
+        {{ render(controller('KnpKnoodleBundle:Survey:latest', {'limit': 5} )) }}
     </div>
 </body>
 </html>

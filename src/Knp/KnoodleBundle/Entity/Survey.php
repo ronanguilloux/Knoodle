@@ -13,7 +13,7 @@ use Knp\KnoodleBundle\Entity\Question;
 
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Knp\KnoodleBundle\Repository\SurveyRepository")
  * @ORM\Table(name="survey")
  */
 Class Survey

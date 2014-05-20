@@ -17,3 +17,8 @@ knoodle_answer:
     requirements:
         id: '\d+'
 
+knoodle_popular:
+    pattern: /popular
+    defaults:
+        _controller: 'KnpKnoodleBundle:Survey:popular'
+
