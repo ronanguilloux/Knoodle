@@ -1,5 +1,5 @@
 imports:
-    - { resource: config_dev.yml }
+    - { resource: config.yml }
 
 framework:
     test: ~
@@ -8,9 +8,16 @@ framework:
     profiler:
         collect: false
 
-web_profiler:
-    toolbar: false
-    intercept_redirects: false
-
 swiftmailer:
     disable_delivery: true
+
+monolog:
+    handlers:
+        main:
+            type:   stream
+            path:   "%kernel.logs_dir%/%kernel.environment%.log"
+            level:  debug
+        console:
+            type:   console
+            bubble: false
+
