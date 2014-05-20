@@ -10,9 +10,14 @@
         <div class="wrap">
             <h1><a href="{{ path('knoodle_index') }}"><img src="{{ asset('bundles/knpknoodle/images/logo.png') }}" alt="Knoodle" /></a></h1>
             <h2>{% block pageTitle%}{{ block('title') }}{% endblock %}</h2>
+            {% include 'KnpKnoodleBundle::_search_form.html.twig' %}
         </div>
     </div>
-    {% include 'KnpKnoodleBundle::_menu.html.twig' %}
+
+    {% block search_form %}
+        {% include 'KnpKnoodleBundle::_menu.html.twig' %}
+    {% endblock %}
+
     {% if app.session.flashbag.keys %}
     <div id="flashes">
         {% for name, message in app.session.flashbag.all %}
