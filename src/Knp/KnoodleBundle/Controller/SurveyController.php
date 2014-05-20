@@ -92,6 +92,27 @@ class SurveyController extends Controller
     }
 
     /**
+     * searchAction
+     *
+     * @return Response
+     */
+    public function searchAction(Request $request)
+    {
+        $name = $request->query->get('q', '');
+        $surveys = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('KnpKnoodleBundle:Survey')
+            ->findAllOrderByCreationAndNamedLike($name)
+        ;
+
+        return $this->render(
+            'KnpKnoodleBundle:Survey:search.html.twig',
+            ['surveys' => $surveys]
+        );
+    }
+
+    /**
      * showAction
      *
      * @param int $id

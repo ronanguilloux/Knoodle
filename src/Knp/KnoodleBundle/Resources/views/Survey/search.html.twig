@@ -1,0 +1,9 @@
+{% extends 'KnpKnoodleBundle:Survey:index.html.twig' %}
+
+{% block content %}
+    {% if not surveys %}
+        <h4>Sorry, no result match {{ app.request.gery.get('q', '') }}</h4>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

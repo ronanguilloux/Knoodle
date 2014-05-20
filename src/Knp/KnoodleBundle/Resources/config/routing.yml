@@ -22,3 +22,8 @@ knoodle_popular:
     defaults:
         _controller: 'KnpKnoodleBundle:Survey:popular'
 
+knoodle_search:
+    pattern: /search
+    defaults:
+        _controller: 'KnpKnoodleBundle:Survey:search'
+

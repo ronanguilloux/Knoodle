@@ -2,19 +2,18 @@
 
 namespace Knp\KnoodleBundle\Repository;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 
 class SurveyRepository extends EntityRepository
 {
 
-    public function build()
-    {
-    }
+    const QUERY_ALIAS = 's';
 
-    function findAllOrderByCreation()
+    public function findAllOrderByCreation()
     {
         return $this
-            ->getEntityManager()
-            ->createQuery('SELECT s FROM KnpKnoodleBundle:Survey AS s ORDER BY s.createdAt')
+            ->buildOrderByCreation()
+            ->getQuery()
             ->execute();
         ;
     }
@@ -32,7 +31,7 @@ LEFT JOIN question.answers answer
 GROUP BY survey.id
 ORDER BY n DESC
 DQL
-            )
+        )
             ->execute();
     }
 
@@ -41,11 +40,58 @@ DQL
         $limit = (int)$limit > 0 ? (int)$limit : 1;
 
         return $this
-            ->getEntityManager()
-            ->createQuery('SELECT survey FROM KnpKnoodleBundle:Survey survey ORDER BY survey.createdAt DESC')
+            ->buildOrderByCreation()
+            ->getQuery()
             ->setMaxResults($limit)
+            ->execute()
+            ;
+    }
+
+    public function findAllOrderByCreationAndNamedLike($name)
+    {
+        $qb = $this->buildOrderByCreation();
+        $qb = $this->buildByNameLike($name, $qb)
+        ;
+
+        return $qb
+            ->getQuery()
             ->execute()
         ;
     }
+
+    /**
+     * build
+     *
+     * @return QueryBuilder
+     */
+    private function buildOrderByCreation(QueryBuilder $qb = null)
+    {
+        if(null === $qb) {
+            $qb = $this->createQueryBuilder(self::QUERY_ALIAS);
+        }
+
+        return $qb
+            ->orderBy('s.createdAt', 'DESC')
+        ;
+    }
+
+    /**
+     * buildByNameLike
+     *
+     * @param string $name
+     * @param QueryBuilder $qb
+     * @return void
+     */
+    private function buildByNameLike($name, QueryBuilder $qb = null){
+        if(null === $qb) {
+            $qb = $this->createQueryBuilder(self::QUERY_ALIAS);
+        }
+
+        return $qb
+            ->where('s.name LIKE :name')
+            ->setParameter('name', '%' . $name . '%')
+        ;
+    }
+
 
 }
