@@ -1,0 +1,8 @@
+knoodle.index: Some Knoodle index
+knoodle.title: Welcome %user%
+knoodle.how_many_survey: |
+    {0} Il n’y a aucune enquête |
+    {1} Il y a une enquête|
+    ]1, Inf] Il y a %count% enquêtes|
+
+

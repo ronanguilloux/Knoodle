@@ -1,0 +1,8 @@
+knoodle.index: Some Knoodle index
+knoodle.title: Welcome %user%
+knoodle.how_many_survey: |
+    {0} There is no survey}
+    {1} There is one survey|
+    ]1, Inf] There is %count% surveys
+
+

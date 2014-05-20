@@ -49,7 +49,9 @@ class SurveyController extends Controller
 
         return $this->render(
             'KnpKnoodleBundle:Survey:index.html.twig',
-            ['surveys' => $surveys]
+            [
+                'surveys' => $surveys
+            ]
         );
     }
 
@@ -178,8 +180,6 @@ class SurveyController extends Controller
             'KnpKnoodleBundle:Survey:answer.html.twig',
             ['survey' => $survey]
         );
-
     }
-
 }
 
