@@ -1,29 +1,46 @@
 knoodle_index:
-    pattern: / #cf. prefix
+    pattern: /.{_format} #cf. prefix
     defaults:
         _controller: 'KnpKnoodleBundle:Survey:index'
+        _format: html
+    requirements:
+        _method: GET
+        _format: html|json|xml
+
+knoodle_popular:
+    pattern: /popular.{_format}
+    defaults:
+        _controller: 'KnpKnoodleBundle:Survey:popular'
+        _format: html
+    requirements:
+        _method: GET
+        _format: html|json|xml
+
+knoodle_search:
+    pattern: /search.{_format}
+    defaults:
+        _controller: 'KnpKnoodleBundle:Survey:search'
+        _format: html
+    requirements:
+        _method: GET
+        _format: html|json|xml
 
 knoodle_show:
-    pattern: /{id} #cf. prefix
+    pattern: /{id}.{_format}
     defaults:
         _controller: 'KnpKnoodleBundle:Survey:show'
+        _format: html
     requirements:
         id: '\d+'
+        _method: GET
+        _format: html|json|xml
 
 knoodle_answer:
     pattern: /{id}/answer
     defaults:
         _controller: 'KnpKnoodleBundle:Survey:answer'
     requirements:
+        _method: GET|POST
         id: '\d+'
 
-knoodle_popular:
-    pattern: /popular
-    defaults:
-        _controller: 'KnpKnoodleBundle:Survey:popular'
-
-knoodle_search:
-    pattern: /search
-    defaults:
-        _controller: 'KnpKnoodleBundle:Survey:search'
 

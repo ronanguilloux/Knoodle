@@ -10,6 +10,7 @@ namespace Knp\KnoodleBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Knp\KnoodleBundle\Entity\Question;
+use JMS\Serializer\Annotation as Serializer;
 
 
 /**
@@ -19,6 +20,7 @@ use Knp\KnoodleBundle\Entity\Question;
 Class Survey
 {
     /**
+     * @Serializer\Exclude
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue

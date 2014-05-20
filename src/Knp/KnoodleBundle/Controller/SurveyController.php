@@ -47,6 +47,8 @@ class SurveyController extends Controller
             ->getRepository('KnpKnoodleBundle:Survey')
             ->findAllOrderByCreation();
 
+        return ['surveys' => $surveys];
+
         return $this->render(
             'KnpKnoodleBundle:Survey:index.html.twig',
             [
@@ -77,7 +79,7 @@ class SurveyController extends Controller
      *
      * @return Response
      */
-    public function popularAction()
+    public function popularAction($_format)
     {
         $surveys = $this
             ->getDoctrine()
@@ -86,11 +88,26 @@ class SurveyController extends Controller
             ->findAllPopular()
         ;
 
-        return $this->render(
-            'KnpKnoodleBundle:Survey:popular.html.twig',
-            ['surveys' => $surveys]
-        );
+        return ['surveys' => $surveys];
 
+        /*
+
+        // The goold old way:
+
+        if('html' !== $_format) {
+            return $this->buildResponse(
+                'KnpKnoodleBUndle:Survey:popular.html.twig',
+                ['surveys' => $surveys],
+                $_format // given in method param
+            );
+        }
+
+        return $this->render(
+            $surveys,
+            [],
+            $_format
+        );
+        */
     }
 
     /**
@@ -108,6 +125,8 @@ class SurveyController extends Controller
             ->findAllOrderByCreationAndNamedLike($name)
         ;
 
+        return ['surveys' => $surveys];
+
         return $this->render(
             'KnpKnoodleBundle:Survey:search.html.twig',
             ['surveys' => $surveys]
@@ -123,11 +142,14 @@ class SurveyController extends Controller
     public function showAction($id)
     {
         $survey = $this->findSurveyOr404($id);
+        return ['surveys' => $surveys];
 
+        /*
         return $this->render(
             'KnpKnoodleBundle:Survey:show.html.twig',
             ['survey' => $survey]
         );
+        */
     }
 
     /**

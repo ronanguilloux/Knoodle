@@ -13,4 +13,13 @@ parameters:
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
+services:
+    #pdo:
+    #    class: PDO
+    #    arguments:
+    #        - '%pdo_dsn%'
+    api_response_listener:
+        class: Knp\KnoodleBundle\EventListener\Kernel\ApiResponseListener
+        tags:
+            - {name: kernel.event_listener, event:kernel.view, method: onKernelView}
 
