@@ -34,5 +34,17 @@ security:
             #http_basic:
             #    realm: "Secured Demo Area"
 
+        knoodle:
+            pattern:    ^/[a-z_A-Z-]+/knoodle/
+            form_login:
+                check_path: knoodle_login_check
+                login_path: knoodle_login
+                default_target_path: knoodle_index
+            logout:
+                path: knoodle_logout
+                target: knoodle_index
+            anonymous: ~
+
     access_control:
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: ^/[a-z_A-Z-]+/knoodle/\d+/answer, roles: ROLE_USER }

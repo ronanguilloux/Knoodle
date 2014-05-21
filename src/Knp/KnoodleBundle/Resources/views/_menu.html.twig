@@ -3,6 +3,16 @@
         <ul>
             <li><a href="{{ path('knoodle_index') }}">Surveys by Date</a></li>
             <li><a href="{{ path('knoodle_popular') }}">Surveys by Date</a></li>
+            {#
+                IS_AUTHENTICATED_ANONYMOUSLY
+                IS_AUTHENTICATED_FULLY
+                IS_AUTHENTICATED_REMEMBER
+            #}
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li><a href="{{ path('knoodle_logout') }}">logout</a></li>
+            {% else %}
+                <li><a href="{{ path('knoodle_login') }}">login</a></li>
+            {% endif %}
         </ul>
     </div>
 </div>

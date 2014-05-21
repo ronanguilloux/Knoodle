@@ -43,4 +43,15 @@ knoodle_answer:
         _method: GET|POST
         id: '\d+'
 
+knoodle_login:
+    pattern: /login
+    defaults:
+        _controller: 'KnpKnoodleBundle:Security:login'
+
+knoodle_login_check:
+    pattern: /login-check
+
+knoodle_logout:
+    pattern: /logout
+
 

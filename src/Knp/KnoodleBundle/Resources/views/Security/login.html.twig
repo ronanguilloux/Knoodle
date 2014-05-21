@@ -1,0 +1,16 @@
+{% extends 'KnpKnoodleBundle::layout.html.twig' %}
+{% block content %}
+    {% if error %}
+        <div>{{ error.message }}</div>
+    {% endif %}
+
+    <form action="{{ path('knoodle_login_check') }}" method="post">
+        <label for="username">Login :</label>
+        <input type="text" id="username" name="_username" value="{{ last_username }}" />
+
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" name="_password" />
+
+        <button type="submit" class="button">login</button>
+    </form>
+{% endblock %}
