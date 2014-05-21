@@ -5,9 +5,12 @@ namespace Knp\KnoodleBundle\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\Form;
 
 use Knp\KnoodleBundle\Entity\Answer;
 use Knp\KnoodleBundle\Entity\Question;
+use Knp\KnoodleBundle\Form\Type\SurveyAnswerType;
 
 class SurveyController extends Controller
 {
@@ -142,7 +145,7 @@ class SurveyController extends Controller
     public function showAction($id)
     {
         $survey = $this->findSurveyOr404($id);
-        return ['surveys' => $surveys];
+        return ['survey' => $survey];
 
         /*
         return $this->render(
@@ -167,13 +170,17 @@ class SurveyController extends Controller
             ->getManager()
         ;
 
-        if($request->isMethod('POST')) {
-            foreach($survey->getQuestions() as $question) {
-                $authorFirstname = $request->request->get('author_first_name');
-                $authorLastname = $request->request->get('author_last_name');
-                $authorEmail = $request->request->get('author_email');
-                $choice = $request->request->get('question_' . $question->getId());
+        $form = $this->createForm(new SurveyAnswerType, null, ['survey' => $survey]);
 
+        $form->handleRequest($request);
+
+        if($form->isValid()) {
+            $authorFirstname = $form->get('first_name')->getData();
+            $authorLastname = $form->get('last_name')->getData();
+            $authorEmail = $form->get('email')->getData();
+
+            foreach($survey->getQuestions() as $question) {
+                $choice = $form->get('choices')->get('question_' . $question->getId())->getData();
                 $answer = (new Answer)
                     ->setAuthorFirstname($authorFirstname)
                     ->setAuthorLastName($authorLastname)
@@ -193,14 +200,13 @@ class SurveyController extends Controller
                 ->add('success' , 'Thanks!');
 
             $this->redirect($this->generateUrl(
-                'knoodle_show',
-                ['id' => $survey->getID()]
+                'knoodle_show', ['id'   => $survey->getID()]
             ));
         }
 
         return $this->render(
             'KnpKnoodleBundle:Survey:answer.html.twig',
-            ['survey' => $survey]
+            ['survey' => $survey, 'form' => $form->createView()]
         );
     }
 }

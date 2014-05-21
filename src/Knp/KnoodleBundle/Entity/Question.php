@@ -140,5 +140,12 @@ Class Question
         return $this->answers;
     }
 
-
+    public function getChoices()
+    {
+        return [
+            1 => 'The first choice',
+            2 => 'The second choice',
+            3 => 'The third choice'
+        ];
+    }
 }

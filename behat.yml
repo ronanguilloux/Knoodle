@@ -1,0 +1,13 @@
+default:
+    autoload:
+        "": %paths.base%/features/bootstrap
+    suites:
+        default:
+            path: %paths.base%/features
+            contexts:
+                - FeatureContext
+                - Behat\MinkExtension\Context\MinkContext
+    extensions:
+        Behat\MinkExtension\ServiceContainer\MinkExtension:
+            base_url: http://knoodle:8080/app_test.php
+            goutte: ~

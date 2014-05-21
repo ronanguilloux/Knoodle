@@ -50,5 +50,13 @@
         "branch-alias": {
             "dev-master": "2.4-dev"
         }
+    },
+    "require-dev": {
+        "phpspec/phpspec": "2.0.*@dev",
+        "behat/behat": "~3@dev",
+        "behat/mink-extension": "~2@dev",
+        "behat/mink-browserkit-driver": "*",
+        "behat/mink-goutte-driver": "*",
+        "behat/mink-selenium2-driver": "*"
     }
 }
